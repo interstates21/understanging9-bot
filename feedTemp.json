@@ -1,0 +1,40 @@
+{
+  "profiles": [
+    {
+      "name": "Otsuru",
+      "message": "Nice to meet you young ninja, let's help each other",
+      "speciality": "Positive Psychology",
+      "experience": "PHD in Cambridge",
+      "values": [
+        "Punk Rock",
+        "Peace, Love and Understanding",
+        "Running",
+        "Freedom"
+      ]
+    },
+    {
+      "name": "Otsuru",
+      "message": "Nice to meet you young ninja, let's help each other",
+      "speciality": "Positive Psychology",
+      "experience": "PHD in Cambridge",
+      "values": [
+        "Punk Rock",
+        "Peace, Love and Understanding",
+        "Running",
+        "Freedom"
+      ]
+    },
+    {
+      "name": "Otsuru",
+      "message": "Nice to meet you young ninja, let's help each other",
+      "speciality": "Positive Psychology",
+      "experience": "PHD in Cambridge",
+      "values": [
+        "Punk Rock",
+        "Peace, Love and Understanding",
+        "Running",
+        "Freedom"
+      ]
+    }
+  ]
+}
