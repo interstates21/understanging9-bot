@@ -1,16 +1,12 @@
 const Scene = require("telegraf/scenes/base");
-const Stage = require("telegraf/stage");
 const keyboard = require("./customerKeyboard");
 const backKeyboard = require("../backKeyboard");
 const { Markup } = require("telegraf");
-const { leave } = Stage;
 const commands = require("../commands");
-const customer = new Scene("customerScene");
 const User = require("../../models/User");
-{
-  /* <u>underline</u>
-<s>strikethrough</s> */
-}
+
+const customerMenuScene = new Scene("customerMenuScene");
+const customerFeedScene = new Scene("customerFeedScene");
 
 const formatItem = item => `
 <a href="tg://user?id=${item._id}"><b>${item.name}</b></a>
@@ -23,10 +19,21 @@ const formatItem = item => `
 
 <a href="tg://user?id=${item._id}">${item.message}</a>`;
 
-customer.enter(async ctx => {
+customerMenuScene.enter(async ctx => {
   await ctx.reply("Welcome dear Ninja, what would you like to do?", keyboard);
 });
-customer.hears(commands.FEED, async ctx => {
+
+customerMenuScene.hears(commands.FEED, async ctx => {
+  ctx.scene.leave("customerMenuScene");
+  ctx.scene.enter("customerFeedScene");
+});
+
+customerMenuScene.hears(commands.BACK, ctx => {
+  ctx.scene.leave("customerMenuScene");
+  ctx.scene.enter("startScene");
+});
+
+customerFeedScene.enter(async ctx => {
   User.find((err, users) => {
     if (err) return console.error(err);
     ctx.reply("⛩⛩⛩", backKeyboard);
@@ -44,4 +51,14 @@ customer.hears(commands.FEED, async ctx => {
     });
   });
 });
-module.exports = customer;
+
+customerFeedScene.hears(commands.BACK, ctx => {
+  ctx.scene.leave("customerFeedScene");
+  ctx.scene.enter("customerMenuScene");
+});
+
+const scenes = {
+  customerFeedScene,
+  customerMenuScene
+};
+module.exports = scenes;
